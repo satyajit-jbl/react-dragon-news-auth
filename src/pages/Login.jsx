@@ -7,6 +7,7 @@ import { Result } from "postcss";
 const Login = () => {
     const {userLogIn, setUser} = useContext(AuthContext);
     const[error, setError] = useState({})
+    // const[errorEmail, setErrorEmail] = useState("")
     const location = useLocation();
     const navigate = useNavigate()
     console.log(location);
@@ -26,9 +27,10 @@ const Login = () => {
             // const errorMessage = error.message;
             // alert(error.code)
             setError({...error, login:err.code})
+           
         })
     }
-    
+    console.log(error.login);
     return (
         <div className="min-h-screen flex justify-center items-center">
             <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10">

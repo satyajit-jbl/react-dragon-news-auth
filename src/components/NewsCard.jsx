@@ -2,8 +2,8 @@ import { FaShareAlt, FaRegEye } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const NewsCard = (props = {}) => {
-  const { news } = props || {};
+const NewsCard = ({news}) => {
+  // const { news } = props || {};
 
   return (
     <div className=" p-4 bg-white rounded-lg shadow-md">

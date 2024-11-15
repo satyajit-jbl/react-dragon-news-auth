@@ -2,7 +2,9 @@ import { useLoaderData } from "react-router-dom";
 import NewsCard from "../components/NewsCard";
 
 const CategoryNews = () => {
+  const {data: breakingNews} = useLoaderData();
   const { data: news } = useLoaderData();
+  console.log(breakingNews);
   console.log(news);
   return (
     <div>

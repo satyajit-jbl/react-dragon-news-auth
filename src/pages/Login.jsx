@@ -1,11 +1,15 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { Result } from "postcss";
 
 
 const Login = () => {
-    const {userLogIn, setUser} = useContext(AuthContext)
+    const {userLogIn, setUser} = useContext(AuthContext);
+    const[error, setError] = useState({})
+    const location = useLocation();
+    const navigate = useNavigate()
+    console.log(location);
     const handleSubmit=(e)=>{
         e.preventDefault();
         const email = e.target.email.value;
@@ -14,12 +18,14 @@ const Login = () => {
         userLogIn(email, password)
         .then(result=>{
             const user = result.user 
-            setUser(user)
+            setUser(user);
+            navigate(location?.state ? location.state : "/")
         })
-        .catch((error)=>{
+        .catch((err)=>{
             // const errrorCode = error.code;
             // const errorMessage = error.message;
-            alert(error.code)
+            // alert(error.code)
+            setError({...error, login:err.code})
         })
     }
     
@@ -39,6 +45,13 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input name="password" type="password" placeholder="password" className="input input-bordered" required />
+                        {
+                            error.login && (
+                                <label className="label text-red-600 text-sm">
+                            {error.login}
+                        </label>
+                            )
+                        }
                         <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
